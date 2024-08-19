@@ -1,112 +1,166 @@
-import Image from "next/image";
+"use client"
+
+import { useEffect, useState } from "react";
 
 export default function Home() {
+
+  const timeCodePairs = [
+    { time: "12:43:00", code: "122700" },
+    { time: "12:43:01", code: "122701" },
+    { time: "12:43:02", code: "122702" },
+    { time: "12:43:03", code: "122703" },
+    { time: "12:43:04", code: "122704" },
+    { time: "12:43:05", code: "122705" },
+    { time: "12:43:06", code: "122706" },
+    { time: "12:43:07", code: "122707" },
+    { time: "12:43:08", code: "122708" },
+    { time: "12:43:09", code: "122709" },
+    { time: "12:43:10", code: "122710" },
+    { time: "12:43:11", code: "122711" },
+    { time: "12:43:12", code: "122712" },
+    { time: "12:43:13", code: "122713" },
+    { time: "12:43:14", code: "122714" },
+    { time: "12:43:15", code: "122715" },
+    { time: "12:43:16", code: "122716" },
+    { time: "12:43:17", code: "122717" },
+    { time: "12:43:18", code: "122718" },
+    { time: "12:43:19", code: "122719" },
+    { time: "12:43:20", code: "122720" },
+    { time: "12:43:21", code: "122721" },
+    { time: "12:43:22", code: "122722" },
+    { time: "12:43:23", code: "122723" },
+    { time: "12:43:24", code: "122724" },
+    { time: "12:43:25", code: "122725" },
+    { time: "12:43:26", code: "122726" },
+    { time: "12:43:27", code: "122727" },
+    { time: "12:43:28", code: "122728" },
+    { time: "12:43:29", code: "122729" },
+    { time: "12:43:30", code: "122730" },
+    { time: "12:43:31", code: "122731" },
+    { time: "12:43:32", code: "122732" },
+    { time: "12:43:33", code: "122733" },
+    { time: "12:43:34", code: "122734" },
+    { time: "12:43:35", code: "122735" },
+    { time: "12:43:36", code: "122736" },
+    { time: "12:43:37", code: "122737" },
+    { time: "12:43:38", code: "122738" },
+    { time: "12:43:39", code: "122739" },
+    { time: "12:43:40", code: "122740" },
+    { time: "12:43:41", code: "122741" },
+    { time: "12:43:42", code: "122742" },
+    { time: "12:43:43", code: "122743" },
+    { time: "12:43:44", code: "122744" },
+    { time: "12:43:45", code: "122745" },
+    { time: "12:43:46", code: "122746" },
+    { time: "12:43:47", code: "122747" },
+    { time: "12:43:48", code: "122748" },
+    { time: "12:43:49", code: "122749" },
+    { time: "12:43:50", code: "122750" },
+    { time: "12:43:51", code: "122751" },
+    { time: "12:43:52", code: "122752" },
+    { time: "12:43:53", code: "122753" },
+    { time: "12:43:54", code: "122754" },
+    { time: "12:43:55", code: "122755" },
+    { time: "12:43:56", code: "122756" },
+    { time: "12:43:57", code: "122757" },
+    { time: "12:43:58", code: "122758" },
+    { time: "12:43:59", code: "122759" },
+    { time: "12:43:00", code: "122700" },
+    { time: "12:44:01", code: "122701" },
+    { time: "12:44:02", code: "122702" },
+    { time: "12:44:03", code: "122703" },
+    { time: "12:44:04", code: "122704" },
+    { time: "12:44:05", code: "122705" },
+    { time: "12:44:06", code: "122706" },
+    { time: "12:44:07", code: "122707" },
+    { time: "12:44:08", code: "122708" },
+    { time: "12:44:09", code: "122709" },
+    { time: "12:44:10", code: "122710" },
+    { time: "12:44:11", code: "122711" },
+    { time: "12:44:12", code: "122712" },
+    { time: "12:44:13", code: "122713" },
+    { time: "12:44:14", code: "122714" },
+    { time: "12:44:15", code: "122715" },
+    { time: "12:44:16", code: "122716" },
+    { time: "12:44:17", code: "122717" },
+    { time: "12:44:18", code: "122718" },
+    { time: "12:44:19", code: "122719" },
+    { time: "12:44:20", code: "122720" },
+    { time: "12:44:21", code: "122721" },
+    { time: "12:44:22", code: "122722" },
+    { time: "12:44:23", code: "122723" },
+    { time: "12:44:24", code: "122724" },
+    { time: "12:44:25", code: "122725" },
+    { time: "12:44:26", code: "122726" },
+    { time: "12:44:27", code: "122727" },
+    { time: "12:44:28", code: "122728" },
+    { time: "12:44:29", code: "122729" },
+    { time: "12:44:30", code: "122730" },
+    { time: "12:44:31", code: "122731" },
+    { time: "12:44:32", code: "122732" },
+    { time: "12:44:33", code: "122733" },
+    { time: "12:44:34", code: "122734" },
+    { time: "12:44:35", code: "122735" },
+    { time: "12:44:36", code: "122736" },
+    { time: "12:44:37", code: "122737" },
+    { time: "12:44:38", code: "122738" },
+    { time: "12:44:39", code: "122739" },
+    { time: "12:44:40", code: "122740" },
+    { time: "12:44:41", code: "122741" },
+    { time: "12:44:42", code: "122742" },
+    { time: "12:44:43", code: "122743" },
+    { time: "12:44:44", code: "122744" },
+    { time: "12:44:45", code: "122745" },
+    { time: "12:44:46", code: "122746" },
+    { time: "12:44:47", code: "122747" },
+    { time: "12:44:48", code: "122748" },
+    { time: "12:44:49", code: "122749" },
+    { time: "12:44:50", code: "122750" },
+    { time: "12:44:51", code: "122751" },
+    { time: "12:44:52", code: "122752" },
+    { time: "12:44:53", code: "122753" },
+    { time: "12:44:54", code: "122754" },
+    { time: "12:44:55", code: "122755" },
+    { time: "12:44:56", code: "122756" },
+    { time: "12:44:57", code: "122757" },
+    { time: "12:44:58", code: "122758" },
+    { time: "12:44:59", code: "122759" },
+  ]
+
+  const [index, setIndex] = useState(0);
+  const [currentCode, setCurrentCode] = useState('');
+
+  //@ts-ignore
+  const getCodeIndex = (startTime, currentTime) => {
+    const start = new Date(`1970-01-01T${startTime}Z`).getTime();
+    const current = new Date(`1970-01-01T${currentTime}Z`).getTime();
+    return Math.floor((current - start) / 1000); // Calculate the number of seconds elapsed
+  };
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    return now.toTimeString().split(' ')[0]; // Format time as "HH:MM:SS"
+  };
+
+  useEffect(() => {
+    const startTime = "12:53:00";
+    const currentTime = getCurrentTime();
+    const startIndex = getCodeIndex(startTime, currentTime) + 3;
+    setIndex(startIndex); // Set initial index
+
+    const interval = setInterval(() => {
+      setCurrentCode(timeCodePairs[index]?.code || ''); // Update the code to display
+      setIndex(prevIndex => prevIndex + 1); // Increment the index each second
+    }, 1000); // Update every second
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [index]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+    <main className="flex justify-center items-center min-h-screen bg-zinc-950 text-zinc-50">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">Current Code:</h1>
+        <p className="text-2xl font-mono">{currentCode}</p>
       </div>
     </main>
   );
