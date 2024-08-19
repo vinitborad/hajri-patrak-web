@@ -1,9 +1,8 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 
 export default function Home() {
-
   const timeCodePairs = [
     { time: "12:43:00", code: "122700" },
     { time: "12:43:01", code: "122701" },
@@ -65,70 +64,72 @@ export default function Home() {
     { time: "12:43:57", code: "122757" },
     { time: "12:43:58", code: "122758" },
     { time: "12:43:59", code: "122759" },
-    { time: "12:43:00", code: "122700" },
-    { time: "12:44:01", code: "122701" },
-    { time: "12:44:02", code: "122702" },
-    { time: "12:44:03", code: "122703" },
-    { time: "12:44:04", code: "122704" },
-    { time: "12:44:05", code: "122705" },
-    { time: "12:44:06", code: "122706" },
-    { time: "12:44:07", code: "122707" },
-    { time: "12:44:08", code: "122708" },
-    { time: "12:44:09", code: "122709" },
-    { time: "12:44:10", code: "122710" },
-    { time: "12:44:11", code: "122711" },
-    { time: "12:44:12", code: "122712" },
-    { time: "12:44:13", code: "122713" },
-    { time: "12:44:14", code: "122714" },
-    { time: "12:44:15", code: "122715" },
-    { time: "12:44:16", code: "122716" },
-    { time: "12:44:17", code: "122717" },
-    { time: "12:44:18", code: "122718" },
-    { time: "12:44:19", code: "122719" },
-    { time: "12:44:20", code: "122720" },
-    { time: "12:44:21", code: "122721" },
-    { time: "12:44:22", code: "122722" },
-    { time: "12:44:23", code: "122723" },
-    { time: "12:44:24", code: "122724" },
-    { time: "12:44:25", code: "122725" },
-    { time: "12:44:26", code: "122726" },
-    { time: "12:44:27", code: "122727" },
-    { time: "12:44:28", code: "122728" },
-    { time: "12:44:29", code: "122729" },
-    { time: "12:44:30", code: "122730" },
-    { time: "12:44:31", code: "122731" },
-    { time: "12:44:32", code: "122732" },
-    { time: "12:44:33", code: "122733" },
-    { time: "12:44:34", code: "122734" },
-    { time: "12:44:35", code: "122735" },
-    { time: "12:44:36", code: "122736" },
-    { time: "12:44:37", code: "122737" },
-    { time: "12:44:38", code: "122738" },
-    { time: "12:44:39", code: "122739" },
-    { time: "12:44:40", code: "122740" },
-    { time: "12:44:41", code: "122741" },
-    { time: "12:44:42", code: "122742" },
-    { time: "12:44:43", code: "122743" },
-    { time: "12:44:44", code: "122744" },
-    { time: "12:44:45", code: "122745" },
-    { time: "12:44:46", code: "122746" },
-    { time: "12:44:47", code: "122747" },
-    { time: "12:44:48", code: "122748" },
-    { time: "12:44:49", code: "122749" },
-    { time: "12:44:50", code: "122750" },
-    { time: "12:44:51", code: "122751" },
-    { time: "12:44:52", code: "122752" },
-    { time: "12:44:53", code: "122753" },
-    { time: "12:44:54", code: "122754" },
-    { time: "12:44:55", code: "122755" },
-    { time: "12:44:56", code: "122756" },
-    { time: "12:44:57", code: "122757" },
-    { time: "12:44:58", code: "122758" },
-    { time: "12:44:59", code: "122759" },
-  ]
+    { time: "12:44:00", code: "122800" },
+    { time: "12:44:01", code: "122801" },
+    { time: "12:44:02", code: "122802" },
+    { time: "12:44:03", code: "122803" },
+    { time: "12:44:04", code: "122804" },
+    { time: "12:44:05", code: "122805" },
+    { time: "12:44:06", code: "122806" },
+    { time: "12:44:07", code: "122807" },
+    { time: "12:44:08", code: "122808" },
+    { time: "12:44:09", code: "122809" },
+    { time: "12:44:10", code: "122810" },
+    { time: "12:44:11", code: "122811" },
+    { time: "12:44:12", code: "122812" },
+    { time: "12:44:13", code: "122813" },
+    { time: "12:44:14", code: "122814" },
+    { time: "12:44:15", code: "122815" },
+    { time: "12:44:16", code: "122816" },
+    { time: "12:44:17", code: "122817" },
+    { time: "12:44:18", code: "122818" },
+    { time: "12:44:19", code: "122819" },
+    { time: "12:44:20", code: "122820" },
+    { time: "12:44:21", code: "122821" },
+    { time: "12:44:22", code: "122822" },
+    { time: "12:44:23", code: "122823" },
+    { time: "12:44:24", code: "122824" },
+    { time: "12:44:25", code: "122825" },
+    { time: "12:44:26", code: "122826" },
+    { time: "12:44:27", code: "122827" },
+    { time: "12:44:28", code: "122828" },
+    { time: "12:44:29", code: "122829" },
+    { time: "12:44:30", code: "122830" },
+    { time: "12:44:31", code: "122831" },
+    { time: "12:44:32", code: "122832" },
+    { time: "12:44:33", code: "122833" },
+    { time: "12:44:34", code: "122834" },
+    { time: "12:44:35", code: "122835" },
+    { time: "12:44:36", code: "122836" },
+    { time: "12:44:37", code: "122837" },
+    { time: "12:44:38", code: "122838" },
+    { time: "12:44:39", code: "122839" },
+    { time: "12:44:40", code: "122840" },
+    { time: "12:44:41", code: "122841" },
+    { time: "12:44:42", code: "122842" },
+    { time: "12:44:43", code: "122843" },
+    { time: "12:44:44", code: "122844" },
+    { time: "12:44:45", code: "122845" },
+    { time: "12:44:46", code: "122846" },
+    { time: "12:44:47", code: "122847" },
+    { time: "12:44:48", code: "122848" },
+    { time: "12:44:49", code: "122849" },
+    { time: "12:44:50", code: "122850" },
+    { time: "12:44:51", code: "122851" },
+    { time: "12:44:52", code: "122852" },
+    { time: "12:44:53", code: "122853" },
+    { time: "12:44:54", code: "122854" },
+    { time: "12:44:55", code: "122855" },
+    { time: "12:44:56", code: "122856" },
+    { time: "12:44:57", code: "122857" },
+    { time: "12:44:58", code: "122858" },
+    { time: "12:44:59", code: "122859" },
+  ];
 
   const [index, setIndex] = useState(0);
   const [currentCode, setCurrentCode] = useState('');
+  const [startTime, setStartTime] = useState("12:53:00");
+  const [offset, setOffset] = useState(0);
 
   //@ts-ignore
   const getCodeIndex = (startTime, currentTime) => {
@@ -143,9 +144,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const startTime = "12:53:00";
     const currentTime = getCurrentTime();
-    const startIndex = getCodeIndex(startTime, currentTime) + 3;
+    const startIndex = getCodeIndex(startTime, currentTime) + offset;
     setIndex(startIndex); // Set initial index
 
     const interval = setInterval(() => {
@@ -154,13 +154,35 @@ export default function Home() {
     }, 1000); // Update every second
 
     return () => clearInterval(interval); // Cleanup on unmount
-  }, [index]);
+  }, [index, startTime, offset]);
 
   return (
-    <main className="flex justify-center items-center min-h-screen bg-zinc-950 text-zinc-50">
-      <div className="text-center">
+    <main className="flex flex-col justify-center items-center min-h-screen bg-zinc-950 text-zinc-50 p-4">
+      <div className="text-center mb-6">
         <h1 className="text-3xl font-bold mb-4">Current Code:</h1>
         <p className="text-2xl font-mono">{currentCode}</p>
+      </div>
+      <div className="space-y-4">
+        <div className="flex flex-col">
+          <label htmlFor="startTime" className="text-lg font-medium">Set Start Time (HH:MM:SS):</label>
+          <input
+            id="startTime"
+            type="text"
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+            className="p-2 bg-zinc-800 text-white rounded"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="offset" className="text-lg font-medium">Set Offset (in seconds):</label>
+          <input
+            id="offset"
+            type="number"
+            value={offset}
+            onChange={(e) => setOffset(Number(e.target.value))}
+            className="p-2 bg-zinc-800 text-white rounded"
+          />
+        </div>
       </div>
     </main>
   );
