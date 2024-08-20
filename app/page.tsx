@@ -29,7 +29,7 @@ export default function OffsetTimePage() {
 
   const fetchCodePairs = async (code: string) => {
     try {
-      const response = await fetch(`http://192.168.1.30:3000/api/v1/code-pairs/get?codePass=${code}`);
+      const response = await fetch(`http://localhost:3000/api/v1/code-pairs/get?codePass=${code}`);
       const data = await response.json();
       if (data.success) {
         setCodePairs(data.codePairsList);
