@@ -13,7 +13,7 @@ export default function OffsetTimePage() {
       const localTime = new Date();
 
       // Get time from a reliable source (World Time API)
-      const response = await fetch('http://worldtimeapi.org/api/timezone/Asia/Kolkata');
+      const response = await fetch('https://worldtimeapi.org/api/timezone/Asia/Kolkata');
       const data = await response.json();
       const serverTime = new Date(data.utc_datetime);
 
