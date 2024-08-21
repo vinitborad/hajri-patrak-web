@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import QRCode from 'qrcode.react'; // Import the QRCode component
 
 export default function OffsetTimePage() {
   const [offsetSeconds, setOffsetSeconds] = useState(0);
@@ -15,7 +16,7 @@ export default function OffsetTimePage() {
   const fetchTimeOffset = async () => {
     try {
       const localTime = new Date();
-      const response = await fetch('https://worldtimeapi.org/api/timezone/Etc/UTC');
+      const response = await fetch('http://localhost:3000/api/v1/time');
       const data = await response.json();
       const serverTime = new Date(data.utc_datetime);
       const timeDifference = serverTime.getTime() - localTime.getTime();
@@ -115,19 +116,29 @@ export default function OffsetTimePage() {
             </div>
 
             <div className="bg-gray-800 p-4 rounded-lg shadow-lg mb-4 text-center">
-              <strong className="text-xl">Incremented Time:</strong> <p className="text-2xl mt-2">{incrementedTime || 'Loading...'}</p>
+              <strong className="text-xl">Incremented Time(UTC):</strong> <p className="text-2xl mt-2">{incrementedTime || 'Loading...'}</p>
             </div>
 
             <div className="bg-gray-800 p-4 rounded-lg shadow-lg mb-4 text-center">
-              <strong className="text-xl">Current Time (JavaScript):</strong> <p className="text-2xl mt-2">{currentTime || 'Loading...'}</p>
+              <strong className="text-xl">Current Time (JavaScript-UTC):</strong> <p className="text-2xl mt-2">{currentTime || 'Loading...'}</p>
             </div>
           </div>
 
-          {/* Right Column: Codes Display */}
-          <div className="flex-1 lg:ml-8 bg-blue-600 p-6 rounded-lg shadow-lg flex items-center justify-center">
-            <p className="text-4xl font-mono text-center">
+          {/* Right Column: Codes Display and QR Code */}
+          <div className="flex-1 lg:ml-8 bg-blue-600 p-6 rounded-lg shadow-lg flex flex-col items-center justify-center">
+            <p className="text-2xl font-mono text-center mb-4">
               {oCode} <span className="ml-4">{currentCode || 'Fetching...'}</span>
             </p>
+            {currentCode && (
+              <QRCode
+                value={oCode+currentCode} // The QR code content
+                size={256} // Make the QR code larger
+                bgColor="#ffffff" // Background color
+                fgColor="#000000" // Foreground color (QR code color)
+                level="Q" // Error correction level (L, M, Q, H)
+                className="mt-4" // Some margin on top
+              />
+            )}
           </div>
         </div>
       )}
