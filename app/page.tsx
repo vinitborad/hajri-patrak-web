@@ -8,7 +8,7 @@ export default function OffsetTimePage() {
   const [incrementedTime, setIncrementedTime] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState<string | null>(null);
   const [passCode, setPassCode] = useState<string>('');
-  const [codePairs, setCodePairs] = useState<{ Time: string; Code: string }[]>([]);
+  const [codePairs, setCodePairs] = useState<{ time: string; code: string }[]>([]);
   const [currentCode, setCurrentCode] = useState<string | null>(null);
   const [oCode, setOCode] = useState<string | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(true);
@@ -30,7 +30,7 @@ export default function OffsetTimePage() {
 
   const fetchCodePairs = async (code: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/v1/code-pairs/get?codePass=${code}`);
+      const response = await fetch(`http://localhost:3000/api/v1/code-pairs/get?passCode=${code}`);
       const data = await response.json();
       if (data.success) {
         setCodePairs(data.codePairsList);
@@ -53,7 +53,7 @@ export default function OffsetTimePage() {
       setCurrentTime(now.toISOString().substr(11, 8)); // Use UTC time format (HH:MM:SS)
 
       const matchingPair = codePairs.find(pair => {
-        const pairTime = new Date(pair.Time);
+        const pairTime = new Date(pair.time);
         return (
           pairTime.getUTCHours() === updatedTime.getUTCHours() &&
           pairTime.getUTCMinutes() === updatedTime.getUTCMinutes() &&
@@ -64,7 +64,7 @@ export default function OffsetTimePage() {
       console.log('Time:', updatedTime.toISOString().substr(11, 8), 'Matching Pair:', matchingPair);
 
       if (matchingPair) {
-        setCurrentCode(matchingPair.Code);
+        setCurrentCode(matchingPair.code);
       }
     };
 
@@ -109,7 +109,7 @@ export default function OffsetTimePage() {
               <input
                 type="number"
                 value={offsetSeconds}
-                onChange={(e) => setOffsetSeconds(Number(e.target.value))}
+                disabled
                 placeholder="Offset seconds"
                 className="w-full p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
