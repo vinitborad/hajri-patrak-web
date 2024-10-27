@@ -13,6 +13,9 @@ export default function OffsetTimePage() {
   const [oCode, setOCode] = useState<string | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(true);
 
+  // Access the TIME_RATE from the environment variables (in milliseconds)
+  const timeRate = Number(process.env.NEXT_PUBLIC_QR_CHANGE_RATE) || 400; // Default to 400 ms if not set
+
   const fetchTimeOffset = async () => {
     try {
       const localTime = new Date();
@@ -52,28 +55,32 @@ export default function OffsetTimePage() {
       setIncrementedTime(updatedTime.toISOString().substr(11, 8)); // Use UTC time format (HH:MM:SS)
       setCurrentTime(now.toISOString().substr(11, 8)); // Use UTC time format (HH:MM:SS)
 
+      // Find the first matching pair (only one) within the timeRate window
       const matchingPair = codePairs.find(pair => {
         const pairTime = new Date(pair.time);
         return (
-          pairTime.getUTCHours() === updatedTime.getUTCHours() &&
-          pairTime.getUTCMinutes() === updatedTime.getUTCMinutes() &&
-          pairTime.getUTCSeconds() === updatedTime.getUTCSeconds()
+          Math.abs(pairTime.getTime() - updatedTime.getTime()) <= timeRate // Match within the timeRate window
         );
       });
 
       console.log('Time:', updatedTime.toISOString().substr(11, 8), 'Matching Pair:', matchingPair);
 
       if (matchingPair) {
-        setCurrentCode(matchingPair.code);
+        // Update only if the code is different from the current code to avoid redundant updates
+        if (currentCode !== matchingPair.code) {
+          setCurrentCode(matchingPair.code);
+        }
+      } else {
+        setCurrentCode(null); // No more valid codes
       }
     };
 
     if (codePairs.length > 0) {
       updateTime();
-      const interval = setInterval(updateTime, 1000);
+      const interval = setInterval(updateTime, timeRate); // Use TIME_RATE for interval
       return () => clearInterval(interval);
     }
-  }, [codePairs]);
+  }, [codePairs, timeRate]);
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
@@ -100,7 +107,6 @@ export default function OffsetTimePage() {
 
       {!isPopupOpen && (
         <div className="flex flex-col lg:flex-row w-full max-w-6xl">
-          {/* Left Column: Time Offset Adjuster */}
           <div className="flex-1 lg:mr-8">
             <h1 className="text-4xl font-bold mb-8">Time Offset Adjuster</h1>
 
@@ -124,19 +130,18 @@ export default function OffsetTimePage() {
             </div>
           </div>
 
-          {/* Right Column: Codes Display and QR Code */}
           <div className="flex-1 lg:ml-8 bg-blue-600 p-6 rounded-lg shadow-lg flex flex-col items-center justify-center">
             <p className="text-2xl font-mono text-center mb-4">
-              {oCode} <span className="ml-4">{currentCode || 'Fetching...'}</span>
+              {oCode} <span className="ml-4">{currentCode || 'No More Codes'}</span>
             </p>
             {currentCode && (
               <QRCode
-                value={oCode+currentCode} // The QR code content
-                size={256} // Make the QR code larger
-                bgColor="#ffffff" // Background color
-                fgColor="#000000" // Foreground color (QR code color)
-                level="Q" // Error correction level (L, M, Q, H)
-                className="mt-4" // Some margin on top
+                value={oCode + currentCode} // Combine oCode and currentCode for the QR code content
+                size={256} // QR code size
+                bgColor="#ffffff" // QR background color
+                fgColor="#000000" // QR foreground color
+                level="Q" // Error correction level
+                className="mt-4"
               />
             )}
           </div>
