@@ -19,7 +19,7 @@ export default function OffsetTimePage() {
   const fetchTimeOffset = async () => {
     try {
       const localTime = new Date();
-      const response = await fetch('http://localhost:3000/api/v1/time');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/time`);
       const data = await response.json();
       const serverTime = new Date(data.utc_datetime);
       const timeDifference = serverTime.getTime() - localTime.getTime();
@@ -33,7 +33,7 @@ export default function OffsetTimePage() {
 
   const fetchCodePairs = async (code: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/v1/code-pairs/get?passCode=${code}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/code-pairs/get?passCode=${code}`);
       const data = await response.json();
       if (data.success) {
         setCodePairs(data.codePairsList);
