@@ -89,7 +89,7 @@ export default function OffsetTimePage() {
           <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
             <h2 className="text-2xl font-semibold mb-4">Enter Pass Code</h2>
             <input
-              type="text"
+              type="password"
               value={passCode}
               onChange={(e) => setPassCode(e.target.value)}
               placeholder="Enter pass code"
