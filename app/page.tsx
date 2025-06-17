@@ -106,8 +106,8 @@ export default function OffsetTimePage() {
       )}
 
       {!isPopupOpen && (
-        <div className="flex flex-col lg:flex-row w-full max-w-6xl">
-          <div className="flex-1 lg:mr-8">
+        <div className="">
+          {/* <div className="flex-1 lg:mr-8">
             <h1 className="text-4xl font-bold mb-8">Time Offset Adjuster</h1>
 
             <div className="mb-8">
@@ -128,16 +128,16 @@ export default function OffsetTimePage() {
             <div className="bg-gray-800 p-4 rounded-lg shadow-lg mb-4 text-center">
               <strong className="text-xl">Current Time (JavaScript-UTC):</strong> <p className="text-2xl mt-2">{currentTime || 'Loading...'}</p>
             </div>
-          </div>
+          </div> */}
 
-          <div className="flex-1 lg:ml-8 bg-blue-600 p-6 rounded-lg shadow-lg flex flex-col items-center justify-center">
-            <p className="text-2xl font-mono text-center mb-4">
+          <div className="lg:ml-8 bg-blue-600 p-8 md:p-10 lg:p-12 rounded-lg shadow-lg flex flex-col items-center justify-center">
+            <p className="text-xl md:text-2xl font-mono text-center mb-4">
               {oCode} <span className="ml-4">{currentCode || 'No More Codes'}</span>
             </p>
             {currentCode && (
               <QRCode
                 value={oCode + currentCode} // Combine oCode and currentCode for the QR code content
-                size={256} // QR code size
+                size={window.innerWidth < 768 ? 250 : window.innerWidth < 1024 ? 320 : 400} // Responsive size
                 bgColor="#ffffff" // QR background color
                 fgColor="#000000" // QR foreground color
                 level="Q" // Error correction level
